@@ -51,7 +51,7 @@ ul {
 }
 
 .section-intro h4 {
-    font-weight: 300;
+    font-weight: 400;
     text-transform: uppercase;
 }
 
@@ -224,6 +224,87 @@ header a {
 
 section {
     padding: 100px 0;
+}
+
+.nav-section {
+    background-color: rgba(52, 58, 64, 1);
+    background-image: url("../images/footer-light-bg.png");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position: center center;
+    color: white;
+    text-align: left;
+  }
+
+.nav-left img {
+    margin-bottom: 10px;
+}
+
+.nav-left h4 {
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.nav-contacts a {
+    display: block;
+    color: white;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    border-radius: 6px;
+    border: 4px solid transparent;
+    transition: all 0.4s;
+    position: relative;
+    color: white;
+  }
+  
+  .social-icons a i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: #494e54;
+    border-radius: 6px;
+    transition: all 0.4s;
+    font-size: 1.3rem;
+  }
+
+  .social-icons a:hover {
+    border: 4px solid #494e54;
+  }
+  
+  .social-icons a:hover i {
+    color: #1057ea;
+    background-color: white;
+  }
+
+.nav-right {
+    flex: 1;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-left: 100px;
+}
+
+.nav-group {
+    display: flex;
+    justify-content: end;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.nav-group h3 {
+    color: white;
+}
+
+.nav-list li a {
+    color: white;
 }
 
 #home {

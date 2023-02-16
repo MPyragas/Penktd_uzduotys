@@ -21,6 +21,7 @@ body {
     margin: 0;
     font-family: 'Mandali', sans-serif;
     color: #6c757d;
+    
 }
 
 a {
@@ -304,6 +305,31 @@ section {
 }
 
 .nav-list li a {
+    color: white;
+}
+
+.footer {
+    background-color: rgba(52, 58, 64, 0.9);
+    padding: 0;
+}
+
+.footer-align {
+    justify-content: space-between;
+}
+
+.footer-right {
+    color: white;
+}
+
+.footer-right a {
+    color: white;
+}
+
+.footer-left {
+    padding: 14px 0 0;
+}
+
+.footer-left a {
     color: white;
 }
 

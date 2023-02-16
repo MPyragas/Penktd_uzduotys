@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Žaidimų konsolė</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="tv" class="tv">
+            <img src="./img/tv.png" alt="televizorius">
+            <div id="screen" class="screen">
+                <div id="view" class="off">
+                    <div class="hellomsg off">
+                        <h2>Hello, do you have time to watch TV? You should be coding.</h2>
+                    </div>
+                    <div class="byemsg off">
+                        <h2>Goodbye, back to coding.</h2>
+                    </div>
+                    <iframe id="iframe" class="off" width="100%" height="315"
+                        src="https://www.youtube.com/embed/y-28CssnqEE" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div id="joystick" class="joystick">
+            <img src="./img/joystick.jpeg" alt="joystick">
+            <div id="buttons" class="btn-container">
+                <button onclick=onOff() class="btn btn-top">ON/OF TV</button>
+                <button onclick=goTv() class="btn btn-y">TV program</button>
+                <button onclick=goBack() class="btn btn-b">Back to hello screen</button>
+                <button onclick=goShop() class="btn btn-x">Games shop</button>
+                <button onclick=goGoogle() class="btn btn-a">Google</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"> </script>
+</body>
+
+</html>

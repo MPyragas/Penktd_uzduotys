@@ -9,7 +9,7 @@ const produktai = [
       imgsrc: './img/space.jpg'
   },
   {
-      pavadinimas: 'Divinity II',
+      pavadinimas: 'Divinity II: Original Sin',
       kaina: '44.99',
       imgsrc: './img/divinity.jpg'
   },

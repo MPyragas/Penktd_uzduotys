@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random cocktail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<style>
+    #cocktail-img {
+        max-width: 500px;
+    }
+</style>
+
+<body class="pt-3">
+    <section class="container">
+        <h1 class="text-center">Dienos kokteilis</h1>
+        <h2 id="name" class="text-center mb-5"></h2>
+        <div class="d-flex w-100 gap-5 mb-5">
+            <div id="cocktail-img" class="w-50"></div>
+            <div>
+                <h3>Ingredients:</h3>
+                <ul id="ingredients"></ul>
+            </div>
+        </div>
+        <div class="text-center">
+            <h3>Instructions</h3>
+            <p id="alco-type"></p>
+            <p>Use: <span id="glass-type"></span></p>
+            <p id="instructions"></p>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary" onclick="showCocktail()">Naujas kokteilis</button>
+        </div>
+    </section>
+
+    <script>
+        const name = document.getElementById("name");
+        const img = document.getElementById("cocktail-img");
+        const ingredients = document.getElementById("ingredients");
+        const alco = document.getElementById("alco-type");
+        const glass = document.getElementById("glass-type");
+        const instructions = document.getElementById("instructions");
+
+        function showCocktail() {
+            fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+                .then(resp => {
+                    return resp.json();
+                })
+                .then(res => {
+                    const drink = res.drinks[0];
+                    ingredients.innerHTML = '';
+                    name.textContent = drink.strDrink;
+                    img.innerHTML = `<img class="img-fluid" src=${drink.strDrinkThumb}>`;
+                    alco.textContent = drink.strAlcoholic;
+                    glass.textContent = drink.strGlass;
+                    instructions.textContent = drink.strInstructions;
+
+                    for (let i = 1; i <= 15; i++) {
+                        let key = "strIngredient" + i;
+                        if (drink[key]) {
+
+                            let measureKey = "strMeasure" + i;
+                            let ing = drink[measureKey] ? `${drink[measureKey]} ${drink[key]}` : drink[key];
+                            ingredients.innerHTML += `<li>${ing}</li>`;
+                        }
+                    }
+                })
+
+        }
+        showCocktail();
+    </script>
+
+</body>
+
+</html>

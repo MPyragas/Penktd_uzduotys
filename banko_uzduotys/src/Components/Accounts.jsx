@@ -1,23 +1,28 @@
 import { useState } from "react";
 import AddAccount from "./AddAccount";
 import { v4 as uuidv4 } from 'uuid';
-import CurrencyInput from "react-currency-input-field";
+import SingleAccount from "./SingleAccount";
+import format from "../functions/format";
+
 
 
 export default function AccountList() {
 
     const [accounts, setAccounts] = useState([]);
+    
 
     function addAccount(e, name, surname) {
         e.preventDefault();
         setAccounts((accounts)=> {
            return [...accounts, {id: uuidv4(), name, surname, money:0}]
         })
-    }
+    };
+
+
     return (
         <>
         <p>Sąskaitų skaičius: {accounts.lenght}</p>
-        <p> Bendra suma: {accounts.reduce((acc, curr)=> acc+curr.money,0)} </p>
+        <p> Bendra suma: { format (accounts.reduce((acc, curr)=> acc+curr.money,0))} </p>
         <table className="table">
             <thead>
                 <tr>
@@ -30,17 +35,7 @@ export default function AccountList() {
             </thead>
             <tbody>
                 {accounts.map((account)=> (
-                <tr key={account.id}>
-                    <td>{account.name}</td>
-                    <td>{account.surname}</td>
-                    <td>{account.money}</td>
-                    <td>
-                        <CurrencyInput id="amount" placeholder="Įveskite sumą"  suffix=" &euro;" /><button>Pridėti</button><button>Atimti</button>
-                    </td>
-                    <td>
-                        <button>Ištrinti</button>
-                    </td>
-                </tr>
+                <SingleAccount key={account.id} account={account} setAccounts={setAccounts} /> 
                 ))}
             </tbody>
             

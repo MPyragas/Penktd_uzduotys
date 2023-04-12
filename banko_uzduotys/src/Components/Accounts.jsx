@@ -1,6 +1,8 @@
 import { useState } from "react";
 import AddAccount from "./AddAccount";
 import { v4 as uuidv4 } from 'uuid';
+import CurrencyInput from "react-currency-input-field";
+
 
 export default function AccountList() {
 
@@ -14,6 +16,8 @@ export default function AccountList() {
     }
     return (
         <>
+        <p>Sąskaitų skaičius: {accounts.lenght}</p>
+        <p> Bendra suma: {accounts.reduce((acc, curr)=> acc+curr.money,0)} </p>
         <table className="table">
             <thead>
                 <tr>
@@ -31,7 +35,7 @@ export default function AccountList() {
                     <td>{account.surname}</td>
                     <td>{account.money}</td>
                     <td>
-                        <input type="number" /><button>Pridėti</button><button>Atimti</button>
+                        <CurrencyInput id="amount" placeholder="Įveskite sumą"  suffix=" &euro;" /><button>Pridėti</button><button>Atimti</button>
                     </td>
                     <td>
                         <button>Ištrinti</button>

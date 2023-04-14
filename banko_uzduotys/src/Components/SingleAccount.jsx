@@ -3,7 +3,7 @@ import { useState } from "react";
 import format from "../functions/format";
 
 
-export default function SingleAccount ({account, setAccounts, addMsg}) {
+export default function SingleAccount ({account, setAccounts, delAccount, addMsg}) {
     const [newAmount, setNewAmmount] = useState("");
     
 
@@ -37,6 +37,14 @@ export default function SingleAccount ({account, setAccounts, addMsg}) {
             addMsg({type:'success', text:'Lėšos nuskaičiuotos sėkmingai'});
             setNewAmmount("");
         }
+    };
+
+    const handleDel=() => {
+        if(account.money > 0) {
+            addMsg({type:'error', text:"Sąskaitos su lėšomis trinti negalima"});
+            return;
+        }
+        delAccount(account.id);
     }
     return (
         <tr>
@@ -47,7 +55,7 @@ export default function SingleAccount ({account, setAccounts, addMsg}) {
                         <CurrencyInput id="amount" placeholder="Įveskite sumą"  suffix=" &euro;" value={newAmount} onValueChange={(value) => changeAmmount(Number(value))} /><button onClick={addMoney}>Pridėti</button><button onClick={subMoney}>Atimti</button>
                     </td>
                     <td>
-                        <button>Ištrinti</button>
+                        <button className={`${account.money > 0 ? "disabled" : null}`} onClick={handleDel}>Ištrinti</button>
                     </td>
                 </tr>
     )

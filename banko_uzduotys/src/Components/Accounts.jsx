@@ -1,8 +1,8 @@
 import { useState } from "react";
-import AddAccount from "./AddAccount";
 import { v4 as uuidv4 } from 'uuid';
 import SingleAccount from "./SingleAccount";
 import format from "../functions/format";
+import AddAccount from "./AddAccount";
 
 
 
@@ -15,6 +15,10 @@ export default function AccountList({addMsg}) {
         setAccounts((accounts)=> {
            return [...accounts, {id: uuidv4(), name, surname, money:0}]
         })
+    };
+
+    function delAccount(id) {  
+        setAccounts(accounts => [...accounts].filter(account=>account.id !==id));
     };
 
 
@@ -34,7 +38,7 @@ export default function AccountList({addMsg}) {
             </thead>
             <tbody>
                 {accounts.map((account)=> (
-                <SingleAccount key={account.id} account={account} setAccounts={setAccounts} addMsg={addMsg} /> 
+                <SingleAccount key={account.id} account={account} delAccount={delAccount} setAccounts={setAccounts} addMsg={addMsg} /> 
                 ))}
             </tbody>
             

@@ -9,6 +9,9 @@
     text-align: center;
     border-bottom: 1px solid;
   }
+  .disabled {
+    pointer-events: none;
+  }
 }
 .error {
   color: red;

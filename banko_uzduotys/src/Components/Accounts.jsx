@@ -6,14 +6,12 @@ import format from "../functions/format";
 
 
 
-export default function AccountList() {
+export default function AccountList({addMsg}) {
 
     const [accounts, setAccounts] = useState([]);
-    const [errMsg, setErrMsg] = useState("");
     
 
-    function addAccount(e, name, surname) {
-        e.preventDefault();
+    function addAccount(name, surname) {
         setAccounts((accounts)=> {
            return [...accounts, {id: uuidv4(), name, surname, money:0}]
         })
@@ -24,7 +22,6 @@ export default function AccountList() {
         <>
         <p>Sąskaitų skaičius: {accounts.lenght}</p>
         <p> Bendra suma: { format (accounts.reduce((acc, curr)=> acc+curr.money,0))} </p>
-        <p className="error">{errMsg}</p>
         <table className="table">
             <thead>
                 <tr>
@@ -37,12 +34,12 @@ export default function AccountList() {
             </thead>
             <tbody>
                 {accounts.map((account)=> (
-                <SingleAccount key={account.id} account={account} setAccounts={setAccounts} setErrMsg={setErrMsg} /> 
+                <SingleAccount key={account.id} account={account} setAccounts={setAccounts} addMsg={addMsg} /> 
                 ))}
             </tbody>
             
         </table>
-        <AddAccount handleSubmit={addAccount} />
+        <AddAccount addAccount={addAccount} addMsg={addMsg} />
         </>
     );
 }

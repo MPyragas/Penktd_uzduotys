@@ -35,3 +35,20 @@
 
 }
 }
+.messages {
+  position: fixed;
+  right: 0;
+  padding: 0.5em;
+  .msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    &.error {
+      color: red;
+    }
+    &.success {
+      color: green;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { useState } from "react";
 import format from "../functions/format";
 
 
-export default function SingleAccount ({account, setAccounts, setErrMsg}) {
+export default function SingleAccount ({account, setAccounts, addMsg}) {
     const [newAmount, setNewAmmount] = useState("");
     
 
@@ -20,6 +20,7 @@ export default function SingleAccount ({account, setAccounts, setErrMsg}) {
         setAccounts((accounts) => {
             return accounts.map((item) => item.id === account.id ? {...item, money: item.money + newAmount} : item)
             });
+            addMsg({type:'success', text:'Lėšų pervedimas atliktas sėkmingai'});
             setNewAmmount("");
         }
     }
@@ -27,12 +28,13 @@ export default function SingleAccount ({account, setAccounts, setErrMsg}) {
     const subMoney = () => {
         if(newAmount !== "") {
             if(account.money - newAmount < 0) {
-                setErrMsg("Sąskaitoje negali likti mažiau nei 0 pinigo");
+                addMsg({type:'error', text:"Sąskaitoje negali likti mažiau nei 0 pinigo"});
                 return;
             }
         setAccounts((accounts) => {
             return accounts.map((item) => item.id === account.id ? {...item, money: item.money - newAmount} : item)
             });
+            addMsg({type:'success', text:'Lėšos nuskaičiuotos sėkmingai'});
             setNewAmmount("");
         }
     }

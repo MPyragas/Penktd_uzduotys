@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function AddAccount ({handleSubmit}) {
+export default function AddAccount ({addAccount, addMsg}) {
     const [name,setName] = useState('');
     const [surname,setSurname] = useState('');
 
@@ -11,9 +11,16 @@ export default function AddAccount ({handleSubmit}) {
         let surname = e.target.value.trim();
         setSurname(surname);
     }
+    function handleSubmit(e) {
+        e.preventDefault();
+        addAccount(name, surname);
+        setName("");
+        setSurname("");
+        addMsg({type:'success', text:'Sąskaita sukurta sėkmingai'});
+    }
 
     return (
-        <form onSubmit={(e) => handleSubmit(e, name, surname)} className="newAcc">
+        <form onSubmit={handleSubmit} className="newAcc">
             <div>
                 <label htmlFor="name">Vardas</label>
                 <input required id="name" onChange={handleNameChange} name="name" value={name} type="text" />

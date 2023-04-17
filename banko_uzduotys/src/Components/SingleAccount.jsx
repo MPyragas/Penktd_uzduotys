@@ -45,11 +45,12 @@ export default function SingleAccount ({account, setAccounts, delAccount, addMsg
             return;
         }
         delAccount(account.id);
+        addMsg({type: "success", text: "Sąskaita sėmingai panaikinta"});
     }
     return (
         <tr>
-                    <td>{account.name}</td>
                     <td>{account.surname}</td>
+                    <td>{account.name}</td>
                     <td>{format(account.money)}</td>
                     <td>
                         <CurrencyInput id="amount" placeholder="Įveskite sumą"  suffix=" &euro;" value={newAmount} onValueChange={(value) => changeAmmount(Number(value))} /><button onClick={addMoney}>Pridėti</button><button onClick={subMoney}>Atimti</button>

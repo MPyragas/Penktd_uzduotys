@@ -50,11 +50,12 @@ export default function AccountList({addMsg}) {
 
     return (
         <>
+        <div className="container">
         <p>Sąskaitų skaičius: {accounts.length}</p>
         <p> Bendra suma: { format (accounts.reduce((acc, curr)=> acc+curr.money,0))} </p>
         <div>
             <span className={'checkbox ' + (radioFilter === 'hasMoney' ? ' checked' : '')} onClick={() => handleFilterClick('hasMoney')}>Rodyti sąskaitas su pinigais</span>
-            <span className={'checkbox ' + (radioFilter === ' noMoney' ? ' checked' : '')} onClick={() => handleFilterClick('noMoney')}>Rodyti tuščias sąskaitas</span>
+            <span className={'checkbox ' + (radioFilter === 'noMoney' ? ' checked' : '')} onClick={() => handleFilterClick('noMoney')}>Rodyti tuščias sąskaitas</span>
         </div>
         <table className="table">
             <thead>
@@ -82,9 +83,9 @@ export default function AccountList({addMsg}) {
                 .map((account)=> (
                 <SingleAccount key={account.id} account={account} delAccount={delAccount} setAccounts={setAccounts} addMsg={addMsg} /> 
                 ))}
-            </tbody>
-            
+            </tbody>  
         </table>
+        </div>
         <AddAccount addAccount={addAccount} addMsg={addMsg} />
         </>
     );

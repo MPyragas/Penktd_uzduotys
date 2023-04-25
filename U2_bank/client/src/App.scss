@@ -1,0 +1,71 @@
+.container {
+  max-width: 1200px;
+  margin: auto;
+  .checkbox {
+    margin-left: 150px;
+    padding: 10px;
+    cursor: pointer;
+    }
+    .checked {
+      background-color: black;
+      color: white;
+    }
+  }
+.table {
+  width: 100%;
+  max-width: fit-content;
+  margin: 2em auto;
+  border-collapse: collapse;
+  th,
+  td {
+    padding: 0.3em 1em;
+    text-align: center;
+    border-bottom: 1px solid;
+  }
+  .disabled {
+    pointer-events: none;
+    color: rgba(128, 128, 128, 0.233);
+  }
+}
+.error {
+  color: red;
+}
+.newAcc {
+    max-width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin: auto;
+    div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    label {
+        flex: 1;
+        margin-right: 1em;
+    }
+    input {
+        flex: 1;
+        padding: 0.3em;
+        font-size: 1em;
+    }
+
+}
+}
+.messages {
+  position: fixed;
+  right: 0;
+  padding: 0.5em;
+  .msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    &.error {
+      color: red;
+    }
+    &.success {
+      color: green;
+    }
+  }
+}

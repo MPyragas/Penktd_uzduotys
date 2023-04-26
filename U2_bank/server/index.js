@@ -32,18 +32,31 @@ app.post("/accounts", (req, res) => {
   });
 });
 
-// app.put("/accounts", (req, res) => {
-//     let data = readFileSync("./data/data.json", "utf8");
-//     data = JSON.parse(data);
-//     const account = { ...req.body.account, id };
-//     data.push(account);
-//     data = JSON.stringify(data);
-//     writeFileSync("./data/data.json", data);
+app.put("/accounts", (req, res) => {
+  let data = readFileSync("./data/data.json", "utf8");
+  data = JSON.parse(data);
+  data = data.map((account) => {
+    return account.id === req.body.account.id ? req.body.account : account;
+  });
+  data = JSON.stringify(data);
+  writeFileSync("./data/data.json", data);
 
-//     res.json({
-//       id,
-//     });
-//   });
+  res.json({
+    id: req.body.account.id,
+  });
+});
+
+app.delete("/accounts/:id", (req, res) => {
+  let data = readFileSync("./data/data.json", "utf8");
+  data = JSON.parse(data);
+  data = data.filter((account) => account.id !== req.params.id);
+  data = JSON.stringify(data);
+  writeFileSync("./data/data.json", data);
+
+  res.json({
+    id: req.params.id,
+  });
+});
 
 app.listen(PORT, () => {
   console.log("server running on 5000 ok");

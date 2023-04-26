@@ -3,7 +3,7 @@ import { useState } from "react";
 import format from "../functions/format";
 
 
-export default function SingleAccount ({account, setAccounts, delAccount, addMsg}) {
+export default function SingleAccount ({account, setEditAccounts, delAccount, addMsg}) {
     const [newAmount, setNewAmmount] = useState("");
     
 
@@ -17,9 +17,7 @@ export default function SingleAccount ({account, setAccounts, delAccount, addMsg
 
     const addMoney = () => {
         if(newAmount !== "") {
-        setAccounts((accounts) => {
-            return accounts.map((item) => item.id === account.id ? {...item, money: item.money + newAmount} : item)
-            });
+            setEditAccounts({...account, money: account.money + newAmount});
             addMsg({type:'success', text:'Lėšų pervedimas atliktas sėkmingai'});
             setNewAmmount("");
         }
@@ -31,9 +29,7 @@ export default function SingleAccount ({account, setAccounts, delAccount, addMsg
                 addMsg({type:'error', text:"Sąskaitoje negali likti mažiau nei 0 pinigo"});
                 return;
             }
-        setAccounts((accounts) => {
-            return accounts.map((item) => item.id === account.id ? {...item, money: item.money - newAmount} : item)
-            });
+            setEditAccounts({...account, money: account.money - newAmount});
             addMsg({type:'success', text:'Lėšos nuskaičiuotos sėkmingai'});
             setNewAmmount("");
         }

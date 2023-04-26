@@ -10,6 +10,7 @@ const accountsUrl = "http://localhost:5000/accounts";
 export default function AccountList({addMsg}) {
 
     const [accounts, setAccounts] = useState(null);
+    const [editAccounts, setEditAccounts] = useState(null);
     const [lastUpdateTime, setLastUpdateTime] = useState(null);
     const [radioFilter, setRadioFilter] = useState(null);
     const handleFilterClick = (filter)=> {
@@ -26,12 +27,14 @@ export default function AccountList({addMsg}) {
         })   
     }, [lastUpdateTime]);
 
-    // useEffect(()=> {
-    //     if(accounts === null) {
-    //         return;
-    //     }
-    //     localStorage.setItem('accounts', JSON.stringify(accounts));
-    // }, [accounts]);
+    useEffect(()=> {
+        if(editAccounts === null) {
+            return;
+        }
+        axios.put(accountsUrl, {account: editAccounts}).then((res) => {
+            setLastUpdateTime(Date.now());
+        })
+    }, [editAccounts]);
 
     function addAccount(name, surname) {
         axios.post(accountsUrl, {account: {name, surname, money:0}}).then((res) => {
@@ -43,7 +46,9 @@ export default function AccountList({addMsg}) {
     };
 
     function delAccount(id) {  
-        setAccounts(accounts => [...accounts].filter(account=>account.id !==id));
+        axios.delete(accountsUrl + '/' + id).then((res) => {
+            setLastUpdateTime(Date.now());
+        });
     };
 
     if(accounts === null) {
@@ -73,17 +78,17 @@ export default function AccountList({addMsg}) {
                 {radioFilter === 'hasMoney' && [...accounts]
                 .sort((a,b)=> a.surname.localeCompare(b.surname, 'lt', {sensitivity:'base'}))
                 .map((account)=> (
-                account.money > 0 && <SingleAccount key={account.id} account={account} delAccount={delAccount} setAccounts={setAccounts} addMsg={addMsg} /> 
+                account.money > 0 && <SingleAccount key={account.id} account={account} delAccount={delAccount} setEditAccounts={setEditAccounts} addMsg={addMsg} /> 
                 ))}
                 {radioFilter === 'noMoney' && [...accounts]
                 .sort((a,b)=> a.surname.localeCompare(b.surname, 'lt', {sensitivity:'base'}))
                 .map((account)=> (
-                account.money === 0 && <SingleAccount key={account.id} account={account} delAccount={delAccount} setAccounts={setAccounts} addMsg={addMsg} /> 
+                account.money === 0 && <SingleAccount key={account.id} account={account} delAccount={delAccount} setEditAccounts={setEditAccounts} addMsg={addMsg} /> 
                 ))}
                 {radioFilter === null && [...accounts]
                 .sort((a,b)=> a.surname.localeCompare(b.surname, 'lt', {sensitivity:'base'}))
                 .map((account)=> (
-                <SingleAccount key={account.id} account={account} delAccount={delAccount} setAccounts={setAccounts} addMsg={addMsg} /> 
+                <SingleAccount key={account.id} account={account} delAccount={delAccount} setEditAccounts={setEditAccounts} addMsg={addMsg} /> 
                 ))}
             </tbody>  
         </table>

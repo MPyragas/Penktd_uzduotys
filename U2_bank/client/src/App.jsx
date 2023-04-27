@@ -7,7 +7,11 @@ import Popup from "./Components/Messages/Popup";
 function App() {
   const [messages, setMessages] = useState([]);
   const addMsg = ({type, text}) => {
-    setMessages((messages)=> [...messages, {id:v4(), type, text}])
+    const id = v4();
+    setMessages((messages)=> [...messages, {id, type, text}]);
+    setTimeout(() => {
+      setMessages(m => m.filter(m => m.id !== id));
+    }, 5000);
   }
   const deleteMsg = (id)=> {
     setMessages(messages => [...messages].filter(msg=>msg.id !==id));
